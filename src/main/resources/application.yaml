@@ -1,0 +1,11 @@
+discount:
+  # Discount percentage
+  amount: 15
+
+  # Strategy: expiration or category
+  strategy: category
+
+  # If expiration: expiration limit in days
+  discountedCategories:
+    - cheese
+    - fruit
