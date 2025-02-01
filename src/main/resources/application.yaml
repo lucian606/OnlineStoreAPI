@@ -1,3 +1,5 @@
+# TODO: Put all values in the app.yaml
+
 discount:
   # Discount percentage
   amount: 15

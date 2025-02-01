@@ -8,6 +8,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
+// TODO: Replace strategy with ENUM
+// TODO: Separate Configuration from ConfigurationProperty using a Data Class for the properties
+// TODO: Have a separate Configuration class for the DiscountStrategyChooser
+// TODO: Create a package for configs
 @Configuration
 @ConfigurationProperties(prefix = "discount")
 class DiscountStrategyChooser(
