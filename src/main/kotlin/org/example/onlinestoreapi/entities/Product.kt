@@ -13,12 +13,12 @@ import java.util.UUID
 data class Product(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    val id: UUID? = null,
+    val id: UUID,
     val name: String,
     @Enumerated(EnumType.STRING)
     val category: ProductCategory,
     val expirationDate: LocalDate,
     val price: Double
 ) {
-    constructor() : this(null, "", ProductCategory.NONE, LocalDate.now(), 0.0)
+    constructor() : this(UUID(0,0), "", ProductCategory.NONE, LocalDate.now(), 0.0)
 }

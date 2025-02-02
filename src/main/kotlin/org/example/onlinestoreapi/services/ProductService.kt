@@ -23,4 +23,8 @@ class ProductService(
     fun getProductById(id: UUID): Product {
         return repository.findById(id).orElse(null)
     }
+
+    fun deleteProductById(id: UUID) {
+        return repository.deleteById(id)
+    }
 }
