@@ -18,8 +18,8 @@ class DiscountStrategyChooser {
     @Bean
     fun discountStrategy(): DiscountStrategy {
         return when (discountStrategyConfig.strategy) {
-            StrategyType.EXPIRATION -> ExpirationDiscountStrategy(discountStrategyConfig.amount, discountStrategyConfig.expirationLimit)
-            StrategyType.CATEGORY -> CategoryDiscountStrategy(discountStrategyConfig.amount, discountStrategyConfig.discountedCategories)
+            StrategyType.EXPIRATION -> ExpirationDiscountStrategy(discountStrategyConfig.expirationLimit)
+            StrategyType.CATEGORY -> CategoryDiscountStrategy(discountStrategyConfig.discountedCategories)
             else -> throw IllegalArgumentException("No strategy: ${discountStrategyConfig.strategy}")
         }
     }
