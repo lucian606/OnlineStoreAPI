@@ -36,5 +36,5 @@ jobs:
     - name: Build
       run: ./gradlew build
 
-    - name: Build with Gradle Wrapper
+    - name: Run unit tests
       run: ./gradlew test
