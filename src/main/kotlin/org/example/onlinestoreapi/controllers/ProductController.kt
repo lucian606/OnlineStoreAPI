@@ -18,6 +18,7 @@ class ProductsController(
 
     @GetMapping("/")
     fun sayHello(): String {
+        println(discountStrategy)
         return "Hello world!"
     }
 

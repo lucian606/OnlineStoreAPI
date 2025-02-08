@@ -1,4 +1,13 @@
-# TODO: Put all values in the app.yaml
+spring:
+  application:
+    name: "OnlineStoreAPI"
+  datasource:
+    url: "jdbc:h2:mem:testdb"
+    driverClassName: "org.h2.Driver"
+    username: "sa"
+    password: "password"
+  jpa:
+    database-platform: "org.hibernate.dialect.H2Dialect"
 
 discount:
   # Discount percentage
