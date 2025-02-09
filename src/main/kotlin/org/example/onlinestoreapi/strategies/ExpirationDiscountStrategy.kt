@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit
 import org.example.onlinestoreapi.entities.Product
 
 class ExpirationDiscountStrategy(val expirationLimit: Long) : DiscountStrategy {
-    override fun applyDiscount(product: Product, discount: Long): Product {
+    override fun applyDiscount(product: Product, discount: Int): Product {
         val currentDate = LocalDate.now()
         val daysUntilExpiration = ChronoUnit.DAYS.between(currentDate, product.expirationDate)
 
