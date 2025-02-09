@@ -22,4 +22,14 @@ class CategoryDiscountStrategyTest {
         val strategy = CategoryDiscountStrategy(discountedCategories)
         assertEquals(expectedProduct, strategy.applyDiscount(product, discount))
     }
+
+    @Test
+    fun `should not apply discount to products outside discounted categories`() {
+        val discount = 10
+        val product = Product(UUID.randomUUID(), "name", ProductCategory.FRUIT, LocalDate.now(), 100.0)
+        val discountedCategories = setOf(ProductCategory.MEAT, ProductCategory.CHEESE)
+
+        val strategy = CategoryDiscountStrategy(discountedCategories)
+        assertEquals(product, strategy.applyDiscount(product, discount))
+    }
 }
