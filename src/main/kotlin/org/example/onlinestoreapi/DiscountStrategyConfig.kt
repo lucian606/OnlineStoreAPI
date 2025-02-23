@@ -8,9 +8,11 @@ import org.example.onlinestoreapi.strategies.StrategyType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.time.Clock
+import java.time.LocalDate
 
 @Configuration
-class DiscountStrategyChooser {
+class DiscountStrategyFactory {
 
     @Autowired
     lateinit var discountStrategyConfig: DiscountStrategyConfig
@@ -22,5 +24,10 @@ class DiscountStrategyChooser {
             StrategyType.CATEGORY -> CategoryDiscountStrategy(discountStrategyConfig.discountedCategories)
             else -> throw IllegalArgumentException("No strategy: ${discountStrategyConfig.strategy}")
         }
+    }
+
+    @Bean
+    fun clock(): Clock {
+        return Clock.systemUTC()
     }
 }

@@ -14,9 +14,7 @@ discount:
   amount: 15
 
   # Strategy: expiration or category
-  strategy: category
+  strategy: expiration
 
   # If expiration: expiration limit in days
-  discountedCategories:
-    - cheese
-    - fruit
+  expirationLimit: 5
