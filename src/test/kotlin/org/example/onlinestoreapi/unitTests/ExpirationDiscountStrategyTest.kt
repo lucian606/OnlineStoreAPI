@@ -1,4 +1,4 @@
-package org.example.onlinestoreapi
+package org.example.onlinestoreapi.unitTests
 
 import org.example.onlinestoreapi.entities.Product
 import org.example.onlinestoreapi.entities.ProductCategory
