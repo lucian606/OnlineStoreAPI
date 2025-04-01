@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 @ConfigurationProperties(prefix = "discount")
 data class DiscountStrategyConfig(
     var strategy: StrategyType = StrategyType.NONE,
-    var amount: Long = 0,
+    var amount: Int = 0,
     var expirationLimit: Long = 0,
     var discountedCategories: Set<ProductCategory> = mutableSetOf()
 )

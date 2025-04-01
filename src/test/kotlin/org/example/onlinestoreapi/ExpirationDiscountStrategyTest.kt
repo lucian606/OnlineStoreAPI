@@ -21,7 +21,7 @@ class ExpirationDiscountStrategyTest {
             UUID.randomUUID(),
             "name",
             ProductCategory.MEAT,
-            LocalDate.ofInstant(Instant.parse("2021-01-06T00:00:00Z"), Clock.systemUTC().zone) ,
+            LocalDate.ofInstant(Instant.parse("2021-01-06T00:00:00Z"), clock.zone),
             100.0
         )
 
@@ -37,7 +37,7 @@ class ExpirationDiscountStrategyTest {
             UUID.randomUUID(),
             "name",
             ProductCategory.MEAT,
-            LocalDate.ofInstant(Instant.parse("2021-01-01T00:00:00Z"), Clock.systemUTC().zone) ,
+            LocalDate.ofInstant(Instant.parse("2021-01-01T00:00:00Z"), clock.zone),
             100.0
         )
 
@@ -53,7 +53,7 @@ class ExpirationDiscountStrategyTest {
             UUID.randomUUID(),
             "name",
             ProductCategory.MEAT,
-            LocalDate.ofInstant(Instant.parse("2021-01-07T00:00:00Z"), Clock.systemUTC().zone) ,
+            LocalDate.ofInstant(Instant.parse("2021-01-07T00:00:00Z"), clock.zone),
             100.0
         )
 
@@ -68,7 +68,7 @@ class ExpirationDiscountStrategyTest {
             UUID.randomUUID(),
             "name",
             ProductCategory.MEAT,
-            LocalDate.ofInstant(Instant.parse("2020-12-31T00:00:00Z"), Clock.systemUTC().zone) ,
+            LocalDate.ofInstant(Instant.parse("2020-12-31T00:00:00Z"), clock.zone),
             100.0
         )
 

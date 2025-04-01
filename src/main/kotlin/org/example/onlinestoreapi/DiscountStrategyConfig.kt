@@ -27,6 +27,11 @@ class DiscountStrategyFactory {
     }
 
     @Bean
+    fun amount(): Int {
+        return discountStrategyConfig.amount
+    }
+
+    @Bean
     fun clock(): Clock {
         return Clock.systemUTC()
     }
