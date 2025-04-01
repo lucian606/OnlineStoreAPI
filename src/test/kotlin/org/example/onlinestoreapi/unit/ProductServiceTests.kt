@@ -1,4 +1,4 @@
-package org.example.onlinestoreapi.unitTests
+package org.example.onlinestoreapi.unit
 
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

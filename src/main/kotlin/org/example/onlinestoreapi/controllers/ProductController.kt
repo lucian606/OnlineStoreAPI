@@ -28,16 +28,11 @@ class ProductsController(
     }
 
     @GetMapping("/products")
-    fun getProductList(@RequestParam discounted: Boolean): List<Product> {
+    fun getProductList(@RequestParam(required = false) discounted: Boolean): List<Product> {
         if (discounted) {
             return productService.getAllProducts().map { discountStrategy.applyDiscount(it, amount) }
         }
         return productService.getAllProducts()
-    }
-
-    @GetMapping("/product/{id}")
-    fun getProductById(@PathVariable id: UUID): Product {
-        return productService.getProductById(id)
     }
 
     @GetMapping("/product/{id}/price")
