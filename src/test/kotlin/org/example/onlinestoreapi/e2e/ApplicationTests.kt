@@ -1,5 +1,6 @@
 package org.example.onlinestoreapi.e2e
 
+import io.mockk.every
 import org.example.onlinestoreapi.entities.Product
 import org.example.onlinestoreapi.entities.ProductCategory
 import org.junit.jupiter.api.BeforeEach
@@ -43,6 +44,7 @@ class ApplicationTests {
 
     @Test
     fun `POST products should add an item to the db`() {
+
         val postResponse = restTemplate.postForEntity(
             "http://localhost:$port/products",
             mapOf(
@@ -65,5 +67,6 @@ class ApplicationTests {
         val getResponse = restTemplate.getForEntity("http://localhost:$port/products", List::class.java)
         assertTrue(getResponse.statusCode.is2xxSuccessful)
         assertEquals(1, getResponse.body!!.size)
+        println(getResponse.body)
     }
 }
