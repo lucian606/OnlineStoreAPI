@@ -27,4 +27,18 @@ class ProductService(
     fun deleteProductById(id: UUID) {
         return repository.deleteById(id)
     }
+
+    fun updateProduct(id: UUID, product: Product): Product? {
+        val existingProduct = repository.findById(id).orElse(null)
+        if (existingProduct != null) {
+            val updatedProduct = existingProduct.copy(
+                name = product.name,
+                category = product.category,
+                expirationDate = product.expirationDate,
+                price = product.price
+            )
+            return repository.save(updatedProduct)
+        }
+        return null
+    }
 }

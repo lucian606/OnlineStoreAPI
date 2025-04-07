@@ -20,7 +20,7 @@ class ExpirationDiscountStrategy(val expirationLimit: Long) : DiscountStrategy {
         val currentDate = LocalDate.now(clock)
         val daysUntilExpiration = ChronoUnit.DAYS.between(currentDate, product.expirationDate)
 
-        return if (daysUntilExpiration in 0..expirationLimit) {
+        return if (daysUntilExpiration in 0..expirationLimit && product.price != null) {
             product.copy(price = product.price * (100f - discount) / 100)
         } else {
             product
