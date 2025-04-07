@@ -32,7 +32,7 @@ class ApplicationTests {
     fun `GET on root path should return 200`() {
         val response = restTemplate.getForEntity("http://localhost:$port/", String::class.java)
         assertTrue(response.statusCode.is2xxSuccessful)
-        assertTrue(response.body!!.contains("Give me some products to sell!"))
+        assertTrue(response.body!!.contains("Let's buy some products!"))
     }
 
     @Test

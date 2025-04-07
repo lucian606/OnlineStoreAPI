@@ -18,7 +18,7 @@ data class Product(
     @Enumerated(EnumType.STRING)
     val category: ProductCategory?,
     val expirationDate: LocalDate?,
-    val price: Double?
+    val price: Double
 ) {
-    constructor() : this(null, null, null, null, null)
+    constructor() : this(null, null, null, null, -1.0)
 }

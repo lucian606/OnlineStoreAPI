@@ -73,7 +73,7 @@ class ProductsController(
 
     @PostMapping("/products")
     fun addProduct(@RequestBody product: Product): ResponseEntity<Any> {
-        if (product.name == null || product.category == null || product.expirationDate == null || product.price == null) {
+        if (product.name == null || product.category == null || product.expirationDate == null || product.price < 0) {
             logger.error("Product $product is missing required fields")
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
@@ -126,7 +126,7 @@ class ProductsController(
         val name = productBody.name ?: product.name
         val category = productBody.category ?: product.category
         val expirationDate = productBody.expirationDate ?: product.expirationDate
-        val price = productBody.price ?: product.price
+        val price = productBody.price.takeIf { it >= 0 } ?: product.price
         val updatedProduct = product.copy(
             name = name,
             category = category,
