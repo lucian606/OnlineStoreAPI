@@ -20,7 +20,7 @@ class ProductService(
         return repository.save(product)
     }
 
-    fun getProductById(id: UUID): Product {
+    fun getProductById(id: UUID): Product? {
         return repository.findById(id).orElse(null)
     }
 
