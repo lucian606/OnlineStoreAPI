@@ -27,4 +27,4 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build the Docker image
-        run: docker buildx build --platform linux/arm/v7 --push --tag blockhealthstore/online-store-api:ARM-1.${GITHUB_RUN_NUMBER} --output type=image,push=true .
+        run: docker buildx build --platform linux/arm64 --push --tag blockhealthstore/online-store-api:ARM-1.${GITHUB_RUN_NUMBER} --output type=image,push=true .
