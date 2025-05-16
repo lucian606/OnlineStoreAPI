@@ -1,0 +1,5 @@
+deployment:
+  replicaCount: 1
+  image:
+    repository: docker.io/blockhealthstore/online-store-api
+    tag: ARM-1.6
