@@ -1,5 +1,8 @@
 package org.example.onlinestoreapi.e2e
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.mockk.every
 import org.example.onlinestoreapi.entities.Product
 import org.example.onlinestoreapi.entities.ProductCategory
@@ -44,7 +47,6 @@ class ApplicationTests {
 
     @Test
     fun `POST products should add an item to the db`() {
-
         val postResponse = restTemplate.postForEntity(
             "http://localhost:$port/products",
             mapOf(
@@ -61,12 +63,21 @@ class ApplicationTests {
             "name",
             ProductCategory.MEAT,
             LocalDate.ofInstant(Instant.parse("2021-01-01T00:00:00Z"), Clock.systemUTC().zone),
-            100.01
+            100.00
         )
 
         val getResponse = restTemplate.getForEntity("http://localhost:$port/products", List::class.java)
         assertTrue(getResponse.statusCode.is2xxSuccessful)
         assertEquals(1, getResponse.body!!.size)
-        println(getResponse.body)
+
+        val objectMapper = JsonMapper.builder()
+            .addModule(JavaTimeModule())
+            .build()
+
+        val product = objectMapper.convertValue(getResponse.body!![0], Product::class.java)
+        assertEquals(expectedProduct.name, product.name)
+        assertEquals(expectedProduct.category, product.category)
+        assertEquals(expectedProduct.expirationDate, product.expirationDate)
+        assertEquals(expectedProduct.price, product.price, 0.01)
     }
 }
