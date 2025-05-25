@@ -47,9 +47,12 @@ class ApplicationTests {
 
     @Test
     fun `POST products should add an item to the db`() {
+        val uuid = UUID.randomUUID()
+
         val postResponse = restTemplate.postForEntity(
             "http://localhost:$port/products",
             mapOf(
+                "id" to uuid,
                 "name" to "name",
                 "category" to "MEAT",
                 "expirationDate" to "2021-01-01",
@@ -59,7 +62,7 @@ class ApplicationTests {
         assertTrue(postResponse.statusCode.is2xxSuccessful)
 
         val expectedProduct = Product(
-            UUID.randomUUID(),
+            uuid,
             "name",
             ProductCategory.MEAT,
             LocalDate.ofInstant(Instant.parse("2021-01-01T00:00:00Z"), Clock.systemUTC().zone),
@@ -75,9 +78,6 @@ class ApplicationTests {
             .build()
 
         val product = objectMapper.convertValue(getResponse.body!![0], Product::class.java)
-        assertEquals(expectedProduct.name, product.name)
-        assertEquals(expectedProduct.category, product.category)
-        assertEquals(expectedProduct.expirationDate, product.expirationDate)
-        assertEquals(expectedProduct.price, product.price, 0.01)
+        assertEquals(expectedProduct, product)
     }
 }
