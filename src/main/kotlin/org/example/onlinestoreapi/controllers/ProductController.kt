@@ -1,7 +1,6 @@
 package org.example.onlinestoreapi.controllers
 
 import org.example.onlinestoreapi.entities.Product
-import org.example.onlinestoreapi.entities.ProductCategory
 import org.example.onlinestoreapi.services.ProductService
 import org.example.onlinestoreapi.strategies.DiscountStrategy
 import org.slf4j.LoggerFactory
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
 import java.util.*
 
 @RestController
