@@ -9,14 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.time.Clock
-import java.time.LocalDate
 
 @Configuration
-class DiscountStrategyFactory {
-
+class DiscountStrategyFactory(
     @Autowired
-    lateinit var discountStrategyConfig: DiscountStrategyConfig
-
+    private val discountStrategyConfig: DiscountStrategyConfig
+) {
     @Bean
     fun discountStrategy(): DiscountStrategy {
         return when (discountStrategyConfig.strategy) {
