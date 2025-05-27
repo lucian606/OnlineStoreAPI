@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpMethod
+import org.springframework.http.ResponseEntity
 import org.springframework.test.annotation.DirtiesContext
 import java.time.Clock
 import java.time.Instant
@@ -116,7 +119,7 @@ class ApplicationTests {
 
         val deleteResponse = restTemplate.exchange(
             "http://localhost:$port/product/$uuid",
-            org.springframework.http.HttpMethod.DELETE,
+            HttpMethod.DELETE,
             null,
             Map::class.java
         )
@@ -131,7 +134,7 @@ class ApplicationTests {
         val uuid = UUID.randomUUID()
         val deleteResponse = restTemplate.exchange(
             "http://localhost:$port/product/$uuid",
-            org.springframework.http.HttpMethod.DELETE,
+            HttpMethod.DELETE,
             null,
             Map::class.java
         )
@@ -162,8 +165,8 @@ class ApplicationTests {
         )
         val putResponse = restTemplate.exchange(
             "http://localhost:$port/product/$uuid",
-            org.springframework.http.HttpMethod.PUT,
-            org.springframework.http.HttpEntity(updatedProduct),
+            HttpMethod.PUT,
+            HttpEntity(updatedProduct),
             Product::class.java
         )
         assertTrue(putResponse.statusCode.is2xxSuccessful)
@@ -182,6 +185,49 @@ class ApplicationTests {
     }
 
     @Test
+    fun `PUT product should not update if new values are null`() {
+        val uuid = UUID.randomUUID()
+        val postResponse = restTemplate.postForEntity(
+            "http://localhost:$port/products",
+            mapOf(
+                "id" to uuid,
+                "name" to "name",
+                "category" to "MEAT",
+                "expirationDate" to "2021-01-01",
+                "price" to 100.0
+            ),
+            String::class.java)
+        assertTrue(postResponse.statusCode.is2xxSuccessful)
+
+        val updatedProduct = mapOf(
+            "id" to uuid,
+            "name" to null,
+            "category" to null,
+            "expirationDate" to null,
+            "price" to -1
+        )
+        val putResponse = restTemplate.exchange(
+            "http://localhost:$port/product/$uuid",
+            HttpMethod.PUT,
+            HttpEntity(updatedProduct),
+            String::class.java
+        )
+        assertTrue(putResponse.statusCode.is2xxSuccessful)
+
+        val getResponse = restTemplate.getForEntity("http://localhost:$port/product/$uuid", Product::class.java)
+        assertTrue(getResponse.statusCode.is2xxSuccessful)
+        val product = objectMapper.convertValue(getResponse.body, Product::class.java)
+        val expectedProduct = Product(
+            uuid,
+            "name",
+            ProductCategory.MEAT,
+            LocalDate.ofInstant(Instant.parse("2021-01-01T00:00:00Z"), Clock.systemUTC().zone),
+            100.00
+        )
+        assertEquals(expectedProduct, product)
+    }
+
+    @Test
     fun `PUT product should return 404 if product does not exist`() {
         val uuid = UUID.randomUUID()
         val updatedProduct = mapOf(
@@ -193,8 +239,8 @@ class ApplicationTests {
         )
         val putResponse = restTemplate.exchange(
             "http://localhost:$port/product/$uuid",
-            org.springframework.http.HttpMethod.PUT,
-            org.springframework.http.HttpEntity(updatedProduct),
+            HttpMethod.PUT,
+            HttpEntity(updatedProduct),
             Product::class.java
         )
         assertTrue(putResponse.statusCode.is4xxClientError)
