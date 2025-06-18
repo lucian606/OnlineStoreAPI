@@ -12,6 +12,7 @@ import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpMethod
 import org.springframework.test.annotation.DirtiesContext
+import org.springframework.test.context.TestPropertySource
 import java.time.Clock
 import java.time.Instant
 import java.time.LocalDate
@@ -21,6 +22,7 @@ import kotlin.test.assertTrue
 
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource("classpath:application.yaml")
 class ApplicationTests {
 
     @LocalServerPort
@@ -86,6 +88,24 @@ class ApplicationTests {
 
         val product = objectMapper.convertValue(getResponse.body!![0], Product::class.java)
         assertEquals(expectedProduct, product)
+    }
+
+    @Test
+    fun `POST products should return 400 if product is missing required fields`() {
+        val invalidProducts = listOf(
+            mapOf("id" to UUID.randomUUID(), "name" to null, "category" to "MEAT", "expirationDate" to "2021-01-01", "price" to 100.0),
+            mapOf("id" to UUID.randomUUID(), "name" to "name", "category" to null, "expirationDate" to "2021-01-01", "price" to 100.0),
+            mapOf("id" to UUID.randomUUID(), "name" to "name", "category" to "MEAT", "expirationDate" to null, "price" to 100.0),
+            mapOf("id" to UUID.randomUUID(), "name" to "name", "category" to "MEAT", "expirationDate" to "2021-01-01", "price" to -1)
+        )
+
+        for (invalidProduct in invalidProducts) {
+            val postResponse = restTemplate.postForEntity(
+                "http://localhost:$port/products",
+                invalidProduct,
+                String::class.java)
+            assertTrue(postResponse.statusCode.is4xxClientError)
+        }
     }
 
     @Test
@@ -270,5 +290,49 @@ class ApplicationTests {
         val uuid = UUID.randomUUID()
         val getPriceResponse = restTemplate.getForEntity("http://localhost:$port/product/$uuid/price", Map::class.java)
         assertTrue(getPriceResponse.statusCode.is4xxClientError)
+    }
+
+    @Test
+    fun `GET product with discounted param should return the discounted product`() {
+        val uuid = UUID.randomUUID()
+        val postResponse = restTemplate.postForEntity(
+            "http://localhost:$port/products",
+            mapOf(
+                "id" to uuid,
+                "name" to "name",
+                "category" to "MEAT",
+                "expirationDate" to "2021-01-01",
+                "price" to 100.0
+            ),
+            String::class.java)
+        assertTrue(postResponse.statusCode.is2xxSuccessful)
+
+        val getResponse = restTemplate.getForEntity("http://localhost:$port/products?discounted=true", List::class.java)
+        assertTrue(getResponse.statusCode.is2xxSuccessful)
+        assertEquals(1, getResponse.body!!.size)
+
+        val product = objectMapper.convertValue(getResponse.body!![0], Product::class.java)
+        assertEquals(ProductCategory.MEAT, product.category)
+        assertEquals(85.0, product.price)
+    }
+
+    @Test
+    fun `GET price with discounted param should return the discounted price`() {
+        val uuid = UUID.randomUUID()
+        val postResponse = restTemplate.postForEntity(
+            "http://localhost:$port/products",
+            mapOf(
+                "id" to uuid,
+                "name" to "name",
+                "category" to "MEAT",
+                "expirationDate" to "2021-01-01",
+                "price" to 100.0
+            ),
+            String::class.java)
+        assertTrue(postResponse.statusCode.is2xxSuccessful)
+
+        val getResponse = restTemplate.getForEntity("http://localhost:$port/product/$uuid/price?discounted=true", Map::class.java)
+        assertTrue(getResponse.statusCode.is2xxSuccessful)
+        assertEquals(85.0, getResponse.body!!["price"])
     }
 }

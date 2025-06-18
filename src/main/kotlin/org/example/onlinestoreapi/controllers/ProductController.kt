@@ -36,6 +36,7 @@ class ProductsController(
     @GetMapping("/products")
     fun getProductList(@RequestParam(required = false) discounted: Boolean): List<Product> {
         if (discounted) {
+            logger.info("Applying discount of $amount% based on strategy")
             return productService.getAllProducts().map { discountStrategy.applyDiscount(it, amount) }
         }
         return productService.getAllProducts()
@@ -56,7 +57,7 @@ class ProductsController(
     }
 
     @GetMapping("/product/{id}/price")
-    fun getProductPrice(@PathVariable id: UUID): ResponseEntity<Any> {
+    fun getProductPrice(@PathVariable id: UUID, @RequestParam(required = false) discounted: Boolean): ResponseEntity<Any> {
         val product = productService.getProductById(id)
         if (product == null) {
             logger.error("Product with id $id not found")
@@ -64,9 +65,15 @@ class ProductsController(
                 .status(HttpStatus.NOT_FOUND)
                 .body(mapOf("message" to "Product not found"))
         }
+        val price = if (discounted) {
+            logger.info("Applying discount of $amount% based on strategy")
+            discountStrategy.applyDiscount(product, amount).price
+        } else {
+            product.price
+        }
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(mapOf("price" to product.price))
+            .body(mapOf("price" to price))
     }
 
     @PostMapping("/products")
