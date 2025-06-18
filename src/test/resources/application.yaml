@@ -14,7 +14,7 @@ discount:
   amount: 15
 
   # Strategy: expiration or category
-  strategy: expiration
+  strategy: category
 
   # If expiration: expiration limit in days
-  expirationLimit: 5
+  discounted-categories: meat
