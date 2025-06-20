@@ -1,4 +1,4 @@
-package org.example.onlinestoreapi.strategies
+package org.onlinestoreapi.strategies
 
 enum class StrategyType {
     NONE,

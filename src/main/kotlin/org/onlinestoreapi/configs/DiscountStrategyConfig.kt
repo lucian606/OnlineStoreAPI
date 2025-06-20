@@ -1,7 +1,7 @@
-package org.example.onlinestoreapi.configs
+package org.onlinestoreapi.configs
 
-import org.example.onlinestoreapi.entities.ProductCategory
-import org.example.onlinestoreapi.strategies.StrategyType
+import org.onlinestoreapi.entities.ProductCategory
+import org.onlinestoreapi.strategies.StrategyType
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.stereotype.Component
 

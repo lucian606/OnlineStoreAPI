@@ -1,8 +1,8 @@
-package org.example.onlinestoreapi.services
+package org.onlinestoreapi.services
 
 import java.util.UUID
-import org.example.onlinestoreapi.entities.Product
-import org.example.onlinestoreapi.repositories.ProductRepository
+import org.onlinestoreapi.entities.Product
+import org.onlinestoreapi.repositories.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

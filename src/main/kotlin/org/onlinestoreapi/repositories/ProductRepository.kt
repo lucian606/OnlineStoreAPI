@@ -1,7 +1,7 @@
-package org.example.onlinestoreapi.repositories
+package org.onlinestoreapi.repositories
 
 import java.util.UUID
-import org.example.onlinestoreapi.entities.Product
+import org.onlinestoreapi.entities.Product
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

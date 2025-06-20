@@ -1,13 +1,13 @@
-package org.example.onlinestoreapi.unit
+package org.onlinestoreapi.unit
 
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
-import org.example.onlinestoreapi.DiscountStrategyFactory
-import org.example.onlinestoreapi.configs.DiscountStrategyConfig
-import org.example.onlinestoreapi.strategies.ExpirationDiscountStrategy
-import org.example.onlinestoreapi.strategies.StrategyType
+import org.onlinestoreapi.DiscountStrategyFactory
+import org.onlinestoreapi.configs.DiscountStrategyConfig
+import org.onlinestoreapi.strategies.ExpirationDiscountStrategy
+import org.onlinestoreapi.strategies.StrategyType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
@@ -38,7 +38,7 @@ class DiscountStrategyFactoryTest {
         every { discountStrategyConfig.discountedCategories } returns setOf()
 
         val strategy = factory.discountStrategy()
-        assertTrue(strategy is org.example.onlinestoreapi.strategies.CategoryDiscountStrategy)
+        assertTrue(strategy is org.onlinestoreapi.strategies.CategoryDiscountStrategy)
         assertTrue(strategy.discountedCategories.isEmpty())
     }
 

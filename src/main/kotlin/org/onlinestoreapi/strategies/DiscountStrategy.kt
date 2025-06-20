@@ -1,6 +1,6 @@
-package org.example.onlinestoreapi.strategies
+package org.onlinestoreapi.strategies
 
-import org.example.onlinestoreapi.entities.Product
+import org.onlinestoreapi.entities.Product
 
 fun interface DiscountStrategy {
     fun applyDiscount(product: Product, discount: Int): Product

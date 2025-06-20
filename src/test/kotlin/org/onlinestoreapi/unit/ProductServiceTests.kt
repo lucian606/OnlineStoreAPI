@@ -1,10 +1,10 @@
-package org.example.onlinestoreapi.unit
+package org.onlinestoreapi.unit
 
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-import org.example.onlinestoreapi.entities.Product
-import org.example.onlinestoreapi.repositories.ProductRepository
-import org.example.onlinestoreapi.services.ProductService
+import org.onlinestoreapi.entities.Product
+import org.onlinestoreapi.repositories.ProductRepository
+import org.onlinestoreapi.services.ProductService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import io.mockk.every
@@ -14,7 +14,7 @@ import io.mockk.mockk
 import java.time.LocalDate
 import java.util.Optional
 import java.util.UUID
-import org.example.onlinestoreapi.entities.ProductCategory
+import org.onlinestoreapi.entities.ProductCategory
 import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(MockKExtension::class)

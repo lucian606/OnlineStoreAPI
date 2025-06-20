@@ -1,10 +1,10 @@
-package org.example.onlinestoreapi
+package org.onlinestoreapi
 
-import org.example.onlinestoreapi.configs.DiscountStrategyConfig
-import org.example.onlinestoreapi.strategies.CategoryDiscountStrategy
-import org.example.onlinestoreapi.strategies.DiscountStrategy
-import org.example.onlinestoreapi.strategies.ExpirationDiscountStrategy
-import org.example.onlinestoreapi.strategies.StrategyType
+import org.onlinestoreapi.configs.DiscountStrategyConfig
+import org.onlinestoreapi.strategies.CategoryDiscountStrategy
+import org.onlinestoreapi.strategies.DiscountStrategy
+import org.onlinestoreapi.strategies.ExpirationDiscountStrategy
+import org.onlinestoreapi.strategies.StrategyType
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

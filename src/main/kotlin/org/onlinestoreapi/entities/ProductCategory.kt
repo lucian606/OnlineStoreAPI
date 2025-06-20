@@ -1,4 +1,4 @@
-package org.example.onlinestoreapi.entities
+package org.onlinestoreapi.entities
 
 enum class ProductCategory {
     NONE,

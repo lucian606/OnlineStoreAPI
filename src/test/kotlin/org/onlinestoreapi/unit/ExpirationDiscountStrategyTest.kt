@@ -1,8 +1,8 @@
-package org.example.onlinestoreapi.unit
+package org.onlinestoreapi.unit
 
-import org.example.onlinestoreapi.entities.Product
-import org.example.onlinestoreapi.entities.ProductCategory
-import org.example.onlinestoreapi.strategies.ExpirationDiscountStrategy
+import org.onlinestoreapi.entities.Product
+import org.onlinestoreapi.entities.ProductCategory
+import org.onlinestoreapi.strategies.ExpirationDiscountStrategy
 import org.junit.jupiter.api.Test
 import java.time.Clock
 import java.time.Instant

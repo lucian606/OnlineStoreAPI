@@ -1,9 +1,9 @@
-package org.example.onlinestoreapi.e2e
+package org.onlinestoreapi.e2e
 
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import org.example.onlinestoreapi.entities.Product
-import org.example.onlinestoreapi.entities.ProductCategory
+import org.onlinestoreapi.entities.Product
+import org.onlinestoreapi.entities.ProductCategory
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

@@ -1,8 +1,8 @@
-package org.example.onlinestoreapi.strategies
+package org.onlinestoreapi.strategies
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
-import org.example.onlinestoreapi.entities.Product
+import org.onlinestoreapi.entities.Product
 import java.time.Clock
 
 class ExpirationDiscountStrategy(val expirationLimit: Long) : DiscountStrategy {

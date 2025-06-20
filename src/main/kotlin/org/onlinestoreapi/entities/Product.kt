@@ -1,4 +1,4 @@
-package org.example.onlinestoreapi.entities
+package org.onlinestoreapi.entities
 
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType

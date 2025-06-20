@@ -1,7 +1,7 @@
-package org.example.onlinestoreapi.strategies
+package org.onlinestoreapi.strategies
 
-import org.example.onlinestoreapi.entities.Product
-import org.example.onlinestoreapi.entities.ProductCategory
+import org.onlinestoreapi.entities.Product
+import org.onlinestoreapi.entities.ProductCategory
 
 class CategoryDiscountStrategy(val discountedCategories: Set<ProductCategory>) : DiscountStrategy {
     override fun applyDiscount(product: Product, discount: Int): Product {

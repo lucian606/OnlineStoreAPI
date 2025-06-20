@@ -1,8 +1,8 @@
-package org.example.onlinestoreapi.controllers
+package org.onlinestoreapi.controllers
 
-import org.example.onlinestoreapi.entities.Product
-import org.example.onlinestoreapi.services.ProductService
-import org.example.onlinestoreapi.strategies.DiscountStrategy
+import org.onlinestoreapi.entities.Product
+import org.onlinestoreapi.services.ProductService
+import org.onlinestoreapi.strategies.DiscountStrategy
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
